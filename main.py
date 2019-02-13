@@ -1,53 +1,25 @@
+v1.1 #Much more orginized user gets to choose how to programs works - beginning of something great!
 from Randomify import Input
 from Randomify import creator
+import Sorting
 import time
 
-def Print(list,length,largest,speed):
-    for i in range(speed):
-        time.sleep(0.001)
-    box = " "
-    row = " "
-    for row_n in range(largest):
-        for space in range(length):
-            
-            
-            if list[space] >= (largest - row_n):
-                row = row + "*"
-            else:
-                row = str(row) + " "
-        box = box + row
-        box = box + '\n'
-        row = ""
-    box = str(box) + str("*" * length) 
-    print box
-    
 
-
-def bubble_sort(list):
-    length = len(list)
-    speed = Input("Please enter the speed of the program (it will be devided by 1,000)")
-    not_sorted = True 
-    while not_sorted:
+def menu():
+    sort_type = 1#Input("What sort type would you like to use? \n 1. Bubble sort (fun to watch) (redicilously slow).")
+    list = creator()
+    print "This is the list we will be sorting: " + str(list)
+    pType = Input("what type of printing would you like to see as the program is running? \n 0. None (Fastest) \n 1. The list itself. \n 2. I nice diagram (Super slow) (Super fun to watch)")
+    if sort_type == 1:
+        if pType == 0:
+            print bubble_sort(list)
         
-        changes = False
-        for i in range(length-1):
-             
-            if list[i] > list[i+1]:
-                temp_no = list[i] #temp_no is the higher number
-                list[i] = list[i+1]
-                list[i+1] = temp_no #We change both of the places 
-                changes = True
-                print str(" "* i) + "||"
-                
-                Print(list, length,length,speed)
-
-                
-                
-            else:
-                pass
-        if changes == False:
-            not_sorted = False
-    return list 
-
-list = creator()
-print bubble_sort(list)
+        elif pType == 1 or pType == 2:
+            speed = Input("How fast (slow) would you like the program to run? (The program ths amount of milleseconds before each print)")
+            print bubble_sort_p(list,speed,pType)
+        
+        else:
+            print "The Program doesn't support that printing type ...yet"
+    else:
+        print "The Program doesn't support that sorting method ...yet"
+menu()
