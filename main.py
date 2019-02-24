@@ -1,6 +1,7 @@
-v1.1 #Much more orginized user gets to choose how to programs works - beginning of something great!
 from Randomify import Input
 from Randomify import creator
+from Sorting import bubble_sort
+from Sorting import bubble_sort_p
 import Sorting
 import time
 

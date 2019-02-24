@@ -1,3 +1,4 @@
+import time
 def Print(list,pType,length,height,speed):
     for i in range(speed):
         time.sleep(0.001)
