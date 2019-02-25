@@ -69,3 +69,38 @@ def bubble_sort(list):
         if changes == False:
             not_sorted = False
     return list 
+def merge_sort(list):
+    
+    if len(list) == 1:
+        return list
+    
+    else:
+        nlist = []
+        flist = merge_sort(list[:len(list)/2])
+
+        slist = merge_sort(list[len(list)/2:])
+        
+        go = True
+        while go:
+            
+            if len(flist)== 0:
+                
+                for i in slist:
+                    nlist.append(i)
+                return nlist
+                
+            if len(slist) == 0:
+
+                for i in flist:
+                    nlist.append(i)
+                return nlist
+            else:
+                
+                
+                if flist[0] > slist[0]:
+                    nlist.append(slist.pop(0))
+                else:
+                    nlist.append(flist.pop(0))
+    return nlist
+            
+    
