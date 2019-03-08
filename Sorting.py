@@ -69,38 +69,87 @@ def bubble_sort(list):
         if changes == False:
             not_sorted = False
     return list 
-def merge_sort(list):
+
+
+def ins(list): 
+  for i in range(len(list)):#for (the place) of every number in list
+    list[:i] = inlist(list[:i],list.pop(i)) # sort(the first part of the list (until where we have sorted) and the next space in the list ) and add it to the second part of the list
+  return list 
     
-    if len(list) == 1:
-        return list
+def inlist(list,num):
+  for i in range(len(list)): #for every space in the (sorted part of the) list
+    if list[i] > num: #if the number is smaller than this piece in the list 
+      list.insert(i,num) #insert the number where it belongs
+      return list
+    else: #if the number is larger than this piece in the list 
+      pass # go on
+  #if we got here, the number must be larger than any piece in the list 
+  list.append(num) #add the number to the end of the list
+  return list
+def ins_p(list,pType,speed): 
     
+    for i in range(len(list)):#for (the place) of every number in list
+        list[:i] = inlist(list[:i],list.pop(i)) # sort(the first part of the list (until where we have sorted) and the next space in the list ) and add it to the second part of the list
+        Print(list,pType,len(list),len(list),speed)
+    return list 
+def merge_sort(list,start,end):
+    middle = (end-start)/2 + start
+    if middle == start:
+        return list 
     else:
-        nlist = []
-        flist = merge_sort(list[:len(list)/2])
-
-        slist = merge_sort(list[len(list)/2:])
+        list[start:middle] = merge_sort(list,start,middle)[start:middle]
+        list[middle:end] = merge_sort(list,middle,end)[middle:end]
         
-        go = True
-        while go:
-            
-            if len(flist)== 0:
-                
-                for i in slist:
-                    nlist.append(i)
-                return nlist
-                
-            if len(slist) == 0:
-
-                for i in flist:
-                    nlist.append(i)
-                return nlist
+        alist = []
+        fnum = start
+        snum = middle
+        while fnum < (middle) and snum < (end):
+            if list[fnum] < list[snum]:
+                alist.append(list[fnum])
+                fnum += 1
             else:
-                
-                
-                if flist[0] > slist[0]:
-                    nlist.append(slist.pop(0))
-                else:
-                    nlist.append(flist.pop(0))
-    return nlist
-            
-    
+                alist.append(list[snum])
+                snum += 1
+        if fnum == middle:
+            for i in range(snum,end):
+                alist.append(list[i])
+        elif snum == end:
+            for i in range(fnum,middle):
+                alist.append(list[i])
+        else:
+            print "something probably went wrong"
+        list[start:end] = alist
+        return list
+def merge_sort_p(list,start,end,pType,speed):
+    middle = (end-start)/2 + start
+    if middle == start:
+        return list 
+    else:
+        list[start:middle] = merge_sort_p(list,start,middle,pType,speed)[start:middle]
+        list[middle:end] = merge_sort_p(list,middle,end,pType,speed)[middle:end]
+        
+        alist = []
+        fnum = start
+        snum = middle
+        
+        
+        while fnum < (middle) and snum < (end):
+            if list[fnum] < list[snum]:
+                alist.append(list[fnum])
+                fnum += 1
+            else:
+                alist.append(list[snum])
+                snum += 1
+        if fnum == middle:
+            for i in range(snum,end):
+                alist.append(list[i])
+        elif snum == end:
+            for i in range(fnum,middle):
+                alist.append(list[i])
+        else:
+            print "something probably went wrong"
+        list[start:end] = alist
+        Print(list,pType,len(list),len(list),speed)
+        return list
+
+
