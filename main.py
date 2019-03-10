@@ -1,4 +1,4 @@
-#v2.0 now with bubble sort, merge sort and insertion sort and prints them all
+#v2.1 now with bubble sort, merge sort and insertion sort and prints them all
 
 from Randomify import creator
 from Sorting import bubble_sort
@@ -9,7 +9,18 @@ from Sorting import ins
 from Sorting import ins_p
 from Sorting import merge_sort
 from Sorting import merge_sort_p
+from Sorting import cocktail_shaker
+from Sorting import cocktail_shaker_p 
 import time
+
+def Input(text):
+  try:
+    return input(text)
+  except:
+    print "Nice Try! Numbers only."
+    return Input
+
+
 
 def ins(list): 
   for i in range(len(list)):#for (the place) of every number in list
@@ -28,10 +39,14 @@ def inlist(list,num):
   return list
 
 def menu():
-    sort_type = Input("What sort type would you like to use? \n 1. Bubble sort (fun to watch) (redicilously slow).\n 2. Merge sort\n 3. Insert")
+    sort_type = Input("""What sort type would you like to use? 
+    1. Bubble sort (fun to watch) (redicilously slow).
+    2. Merge sort
+    3. Insert
+    4. Cocktail Sort (Bubble Sorts cooler cousin)""")
     list = creator()
     print "This is the list we will be sorting: " + str(list)
-    pType = Input("what type of printing would you like to see as the program is running? \n 0. None (Fastest) \n 1. The list itself. \n 2. I nice diagram (Super slow) (Super fun to watch)")
+    pType = Input("""what type of printing would you like to see as the program is running?  0. None (Fastest) \n 1. The list itself. \n 2. I nice diagram (Super slow) (Super fun to watch)""")
     
     if sort_type == 1:
         if pType == 0:
@@ -56,7 +71,12 @@ def menu():
             print ins(list)
         else:
             print ins_p(list,pType,Input("How fast (slow) would you like the program to run? (The program ths amount of milleseconds before each print)"))
-
+    elif sort_type ==4:
+        if pType ==0:
+            print cocktail_shaker(list)
+        else:
+          speed = Input("How fast (slow) would you like the program to run? (The program ths amount of milleseconds before each print)")
+          cocktail_shaker_p(list,pType,speed)
     #if sort_type == 4:
      #   print quick(list)
     

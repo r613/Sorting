@@ -153,3 +153,64 @@ def merge_sort_p(list,start,end,pType,speed):
         return list
 
 
+def cocktail_shaker(list):
+    length = len(list)
+    not_sorted = True 
+    print length
+    
+    while not_sorted:
+        changes = False
+        for i in range(0,length-1): #for the size of the list -1 (beside the last)
+            num1 = i 
+            num2 = i + 1 #We mark the next place as well
+            if list[num1] > list[num2]: #if the place on the left is larger 
+                list = change(list,num1,num2) #we switch the places of the pieces
+                changes = True #we mark that there were changes
+            else:
+                pass
+        for i in range(0,length-1): #we run i for every number in the list (except the last one)
+            num1 = length - i -2 #for the length of the list -i -2 (the opposite of the list -2 and -1 was just ridiculously confusing )
+            num2 = length - i -1
+            if list[num1] > list[num2]:
+                list = change(list,num1,num2)
+                changes = True
+            else:
+                pass
+        if changes == False:
+                not_sorted = False 
+        
+    return list 
+def cocktail_shaker_p(list,pType,speed):
+    length = len(list)
+    not_sorted = True 
+    print length
+    while not_sorted:
+        changes = False
+        
+        for i in range(0,length-1): #for the size of the list -1 (beside the last)
+            num1 = i 
+            num2 = i + 1 #We mark the next place as well
+            if list[num1] > list[num2]: #if the place on the left is larger 
+                list = change(list,num1,num2) #we switch the places of the pieces
+                Print(list,pType,length,length,speed)
+                changes = True #we mark that there were changes
+            else:
+                pass
+        for i in range(0,length-1): #we run i for every number in the list (except the last one)
+            num1 = length - i -2 #for the length of the list -i -2 (the opposite of the list -2 and -1 was just ridiculously confusing )
+            num2 = length - i -1
+            if list[num1] > list[num2]:
+                list = change(list,num1,num2)
+                Print(list,pType,length,length,speed)
+                changes = True
+            else:
+                pass
+        if changes == False:
+                not_sorted = False 
+        
+    return list 
+def change(list,num1,num2):
+    temp_no = list[num1]
+    list[num1] = list[num2]
+    list[num2] = temp_no
+    return list
