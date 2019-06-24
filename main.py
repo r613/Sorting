@@ -1,86 +1,83 @@
-#v2.1 now with bubble sort, merge sort and insertion sort and prints them all
 
-from Randomify import creator
-from Sorting import bubble_sort
-
-from Sorting import bubble_sort_p
-
-from Sorting import ins
-from Sorting import ins_p
-from Sorting import merge_sort
-from Sorting import merge_sort_p
-from Sorting import cocktail_shaker
-from Sorting import cocktail_shaker_p 
-import time
-
-def Input(text):
-  try:
-    return input(text)
-  except:
-    print "Nice Try! Numbers only."
-    return Input
-
-
-
-def ins(list): 
-  for i in range(len(list)):#for (the place) of every number in list
-    list[:i] = inlist(list[:i],list.pop(i)) # sort(the first part of the list (until where we have sorted) and the next space in the list ) and add it to the second part of the list
-  return list 
-    
-def inlist(list,num):
-  for i in range(len(list)): #for every space in the (sorted part of the) list
-    if list[i] > num: #if the number is smaller than this piece in the list 
-      list.insert(i,num) #insert the number where it belongs
-      return list
-    else: #if the number is larger than this piece in the list 
-      pass # go on
-  #if we got here, the number must be larger than any piece in the list 
-  list.append(num) #add the number to the end of the list
-  return list
-
+from rand import randy
+from user import Input
+from user import Print
+from user import sPrint
+from sorting import bubble_sort
+from sorting import pbubble_sort
+from sorting import cocktail_shaker
+from sorting import pcocktail_shaker
+from sorting import merge_sort
+from sorting import pmerge_sort
+from sorting import insertion
+from sorting import pinsertion
+from sorting import selection
+from sorting import pselection
 def menu():
-    sort_type = Input("""What sort type would you like to use? 
-    1. Bubble sort (fun to watch) (redicilously slow).
-    2. Merge sort
-    3. Insert
-    4. Cocktail Sort (Bubble Sorts cooler cousin)""")
-    list = creator()
-    print "This is the list we will be sorting: " + str(list)
-    pType = Input("""what type of printing would you like to see as the program is running?  0. None (Fastest) \n 1. The list itself. \n 2. I nice diagram (Super slow) (Super fun to watch)""")
+    length = Input("What would you like the size of your list to be?")
+    tlist = randy(length)
     
-    if sort_type == 1:
-        if pType == 0:
-            print bubble_sort(list)
-        
-        elif pType == 1 or pType == 2:
-            speed = Input("How fast (slow) would you like the program to run? (The program ths amount of milleseconds before each print)")
-            print bubble_sort_p(list,speed,pType)
-        
-        else:
-            print "The Program doesn't support that printing type ...yet"
-    elif sort_type == 2:
-        if pType == 0:
-            print merge_sort(list,0,len(list))
-        else:
-            speed = Input("How fast (slow) would you like the program to run? (The program ths amount of milleseconds before each print)")
-            print list
-            print "program doesn't support printing... yet"
-            print  merge_sort_p(list,0,len(list),pType,speed)
-    elif sort_type == 3:
-        if pType == 0:
-            print ins(list)
-        else:
-            print ins_p(list,pType,Input("How fast (slow) would you like the program to run? (The program ths amount of milleseconds before each print)"))
-    elif sort_type ==4:
-        if pType ==0:
-            print cocktail_shaker(list)
-        else:
-          speed = Input("How fast (slow) would you like the program to run? (The program ths amount of milleseconds before each print)")
-          cocktail_shaker_p(list,pType,speed)
-    #if sort_type == 4:
-     #   print quick(list)
-    
+    #for i in range(length):
+    #    tlist.append(Input("Please enter a number to add to your list: "))
+    print tlist
+    choice = Input("""Which sorting method would you like to use?
+    1.  Bubble Sort
+    10. Bubble Sort     - Live
+    2.  Cocktail Sort
+    20. Cocktail Sort   - Live
+    3.  Merge Sort
+    30. Merge Sort      - Live
+    4.  Insertion sort
+    40.  Insertion sort - Live
+    5.  Selection Sort
+    50. Selection Sort  - Live""")
+    if choice == 1:
+        print bubble_sort(tlist)
+    elif choice == 10:
+        Print(pbubble_sort(tlist))
+    elif choice == 2: 
+        print cocktail_shaker(tlist)
+    elif choice == 20:
+        Print(pcocktail_shaker(tlist))
+    elif choice == 3:
+        print merge_sort(tlist,0,len(tlist))
+    elif choice == 30:
+        Print(pmerge_sort(tlist,0,len(tlist)))
+    elif choice == 4:
+        print insertion(tlist)
+    elif choice == 40:
+        Print(pinsertion(tlist))
+    elif choice == 5:
+        print selection(tlist)
+    elif choice == 50:
+        print pselection(tlist)
+    elif choice == 60:
+        print quick(tlist)
     else:
-        print "The Program doesn't support that sorting method ...yet"
+        print "That sorting algorithm doesn't exist yet"
+
+
+def quick(tlist):
+    if tlist == []:
+        return tlist
+    if len(tlist) == 1:
+        return tlist
+    half = len(tlist)/2
+    tlist.append(tlist.pop(half))
+    list1 = []
+    list2 = []
+    for i in range(len(tlist)-2):
+        if tlist[i] < tlist[len(tlist)-1]:
+            list1.append(tlist[i])
+        else:
+            list2.append(tlist[i])
     
+    list1 = quick(list1)
+    list2 = quick(list2)
+    print tlist[len(tlist)-1]
+    print list1 + [tlist[len(tlist)-1]] + list2
+    return list1 + [tlist[len(tlist)-1]] + list2
+
+
+
 menu()
